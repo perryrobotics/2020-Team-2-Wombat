@@ -8,7 +8,7 @@ Touch_port=0
 Lever_port=1
 
 
-Thresh = 4000
+Thresh = 3000
 
     
 

@@ -5,6 +5,8 @@ from motion import *
 from sensors import *
 from effectors import *
 from constants import *
+from start import *
+
 
 KIPR=ctypes.CDLL("/usr/lib/libkipr.so")
 
@@ -15,9 +17,8 @@ def main():
 	tail_up()
 	arm_start(50)
 	claw_open(50)
-	while KIPR.a_button() == 0:
-		pass
-        
+	start(2)
+	KIPR.shut_down_in(120)
 	print("HERE WE GO!!:")
 	KIPR.msleep(2000)
 #================================================================   
@@ -57,6 +58,7 @@ def main():
 	arm_half(50)
 	right(1000, 800)
 	arm_up(50)
+	claw_close(50)
             
 #knocked over conmtainers, get to ramp
 	forward(1000,550) #get away from swings
@@ -66,29 +68,34 @@ def main():
 	forward(1000, 6500) #hit back pipe
 	backward(1000,700)  #get off back pipe a buit
 	left(750,1150)  #turn towards ramp
-	forward(1000,5000) #hit pipe by ramp
-	backward(1000, 800)
+	forward(1000,5500) #hit pipe by ramp
+	backward(1000, 500)
 	left(1000,1100)
-            
+	backward(1000,1000)
 
-	forward(1500, 3000)
+
+	#GO UP THE RAMP
+	#forward(1500, 3000)
 
 	linefollowing_bump(1500)
 	
 	#Bump
-	backward(1000, 700)
-	left(1500,700)
+	backward(1000, 700)# get off the pipe
+	left(1500,600) #turn to the mine
 	forward(1500, 700)
-	left(1500,450)
+	left(1500,500)
 	forward (1500, 700)
 	arm_half(30)
 	linefollow_cliff(1000)
 	backward(1000, 1500)
 	#ready to go down
 	arm_yellow(10)
+	claw_open(50)
 	forward(900,750)
 	arm_deep(50)
-	claw_close(50)
+	claw_close(70)
+	claw_open(70)
+	claw_close(70)
 	#We got em, get em out now!!
 	arm_yellow(10)
 	backward(1000, 700)
@@ -97,13 +104,18 @@ def main():
 	#OK, got em out! Now lets dump it on the ramp!
 	claw_open(10)
 #SCORED!!  NOW MAKE SECOND GRAB!
-	linefollow_cliff(1000)
+	claw_close(50)
+	left(1000, 50)
+	linefollow_grab(1000)
 	backward(1000, 1500)
 	#ready to go down
 	arm_yellow(25)
-	forward(900,700)
+	forward(900,610)
+	claw_open(50)
 	arm_deep(10)
-	claw_close(10)	
+	claw_close(70)
+	claw_open(70)
+	claw_close(70)
 	#We got em, get em out now!!
 	arm_yellow(25)
 	backward(1000, 800)
@@ -114,13 +126,18 @@ def main():
 
 	claw_open(50)
 #SCORED!!  NOW MAKE Third GRAB!
-	linefollow_cliff(1000)
+	claw_close(50)
+	left(600, 50)
+	linefollow_grab(1000)
 	backward(1000, 1500)
 	#ready to go down
 	arm_yellow(25)
-	forward(1000,700)
+	forward(1000,620)
+	claw_open(50)
 	arm_deep(10)
-	claw_close(10)	
+	claw_close(70)
+	claw_open(70)
+	claw_close(70)
 	#We got em, get em out now!!
 	arm_yellow(25)
 	backward(1000, 800)

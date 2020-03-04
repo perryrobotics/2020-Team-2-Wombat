@@ -79,7 +79,7 @@ def Original_Main():
 	backward(1000, 700)
 	left(1500,700)
 	forward(1500, 700)
-	left(1500,450)
+	left(1500,500)
 	forward (1500, 700)
 	arm_half(30)
 	linefollow_cliff(1000)

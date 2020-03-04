@@ -71,12 +71,12 @@ def linefollowing_bump(speed):
 	KIPR.cmpc(Lmotor)
 	KIPR.cmpc(Rmotor)
 	while KIPR.digital(Touch_port) < 1:
-		if KIPR.analog(Top_Hat_left_port) > Thresh:
+		if KIPR.analog(Top_Hat_left_port) > 3700:
 			KIPR.cmpc(Lmotor)
 			KIPR.mav(Lmotor,-speed)
 			KIPR.mav(Rmotor, speed)
 			KIPR.msleep(100)
-		elif KIPR.analog(Top_Hat_right_port) > Thresh:
+		elif KIPR.analog(Top_Hat_right_port) > 3700:
 			KIPR.cmpc(Lmotor)
 			KIPR.mav(Lmotor, speed)
 			KIPR.mav(Rmotor, -speed)
@@ -91,7 +91,7 @@ def linefollowing_bump(speed):
 def linefollow_cliff(speed):
 	KIPR.cmpc(Lmotor)
 	KIPR.cmpc(Rmotor)
-	while KIPR.analog(Top_Hat_right_port) < 4000 or KIPR.analog(Top_Hat_left_port) < 4000:
+	while KIPR.analog(Top_Hat_right_port) < Thresh or KIPR.analog(Top_Hat_left_port) < Thresh:
 		if KIPR.analog(Top_Hat_left_port) > Thresh:
 			KIPR.cmpc(Lmotor)
 			KIPR.mav(Lmotor,-speed)
@@ -101,6 +101,24 @@ def linefollow_cliff(speed):
 			KIPR.cmpc(Lmotor)
 			KIPR.mav(Lmotor, speed)
 			KIPR.mav(Rmotor, -speed)
+			KIPR.msleep(100)
+		else:
+			KIPR.mav(Lmotor, speed)
+			KIPR.mav(Rmotor, speed)		
+	KIPR.ao()		
+def linefollow_grab(speed):
+	KIPR.cmpc(Lmotor)
+	KIPR.cmpc(Rmotor)
+	while KIPR.analog(Top_Hat_right_port) < Thresh or KIPR.analog(Top_Hat_left_port) < Thresh:
+		if KIPR.analog(Top_Hat_left_port) > Thresh:
+			KIPR.cmpc(Lmotor)
+			KIPR.mav(Lmotor,-speed/2)
+			KIPR.mav(Rmotor, speed/2)
+			KIPR.msleep(100)
+		elif KIPR.analog(Top_Hat_right_port) > Thresh:
+			KIPR.cmpc(Lmotor)
+			KIPR.mav(Lmotor, speed/2)
+			KIPR.mav(Rmotor, -speed/2)
 			KIPR.msleep(100)
 		else:
 			KIPR.mav(Lmotor, speed)
